@@ -13,5 +13,14 @@
     {
       "path": "./tsconfig.vitest.json"
     }
-  ]
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+  ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/**/*.test.ts",
+    ]
 }

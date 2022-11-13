@@ -22,9 +22,8 @@ module.exports = {
   plugins: ["vue", "@typescript-eslint"],
   overrides: [],
   rules: {
-    "no-console": "off",
-    "no-debugger": "off",
-    "no-unused-vars": "off",
-    "no-empty": "off"
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "no-unused-vars": "warn",
   }
 };
