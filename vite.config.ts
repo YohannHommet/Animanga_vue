@@ -15,14 +15,14 @@ export default defineConfig({
       "@components": fileURLToPath(
         new URL("./src/components", import.meta.url)
       ),
-      "@tests": fileURLToPath(new URL("./tests", import.meta.url)),
-    },
+      "@tests": fileURLToPath(new URL("./tests", import.meta.url))
+    }
   },
   base: "./",
   server: {
     port: 4000,
     open: true,
-    cors: true,
+    cors: true
   },
   test: {
     environment: "jsdom",
@@ -32,10 +32,10 @@ export default defineConfig({
         "env.d.ts",
         "src/main.ts",
         "src/core/**/*.{ts,vue}",
-        "src/shared/**/*.{ts,vue}",
+        "src/shared/**/*.{ts,vue}"
       ],
       reporter: ["text-summary", "html", "json"],
-      reportsDirectory: "tests/coverage",
-    },
-  },
+      reportsDirectory: "tests/coverage"
+    }
+  }
 });
