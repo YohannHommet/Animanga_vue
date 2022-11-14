@@ -10,13 +10,5 @@
   "endOfLine": "auto",
   "htmlWhitespaceSensitivity": "ignore",
   "vueIndentScriptAndStyle": true,
-  "filepath": "src/App.vue",
-  "parser": "vue",
-  "plugins": [
-    "prettier-eslint"
-  ],
-  "editorconfig": true,
-  "prettier-eslint": {
-    "eslintPath": "node_modules/eslint"
-  }
+  "filepath": "src/App.vue"
 }
