@@ -4,7 +4,6 @@
 [![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=for-the-badge)](https://vitejs.dev/)
 [![Vitest](https://img.shields.io/badge/-Vitest-6E9F18?logo=vitest&logoColor=white&style=for-the-badge)](https://vitest.dev/)
 [![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white&style=for-the-badge)](https://www.typescriptlang.org/)
-[![Prettier](https://img.shields.io/badge/-Prettier-F7B93E?logo=prettier&logoColor=white&style=for-the-badge)](https://prettier.io/)
 [![ESLint](https://img.shields.io/badge/-ESLint-4B32C3?logo=eslint&logoColor=white&style=for-the-badge)](https://eslint.org/)
 [![Yarn](https://img.shields.io/badge/-Yarn-2C8EBB?logo=yarn&logoColor=white&style=for-the-badge)](https://yarnpkg.com/)
 
@@ -44,9 +43,4 @@ yarn test:unit
 ```sh
 # Lints and fixes files
 yarn lint
-```
-
-```sh
-# Pretty and fixes files
-yarn prettier
 ```
