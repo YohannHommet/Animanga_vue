@@ -1,18 +1,18 @@
 <script setup lang="ts">
-  import { RouterLink, RouterView } from "vue-router"
+import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+<header>
+  <div class="wrapper">
+    <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="/about">About</router-link>
+    </nav>
+  </div>
+</header>
 
-  <RouterView />
+<router-view />
 </template>
 
 <style scoped>
