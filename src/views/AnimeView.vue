@@ -1,11 +1,11 @@
 <template>
 <main id="anime">
-  <h1>{{ anime.title }}</h1>
-  <div class="anime__card">
-    <div class="anime__card_img">
+  <h1 class="anime_title">{{ anime.title }}</h1>
+  <div class="anime_card">
+    <div class="anime_card__img">
       <img :src="anime.images?.webp?.image_url || ``" alt="anime image" >
     </div>
-    <div class="anime__card_description">
+    <div class="anime_card__description">
       <p>{{ anime.synopsis }}</p>
     </div>
   </div>
@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-// Get the id from the route
 import { onMounted, ref } from 'vue';
 import { RouteLocationNormalizedLoaded, useRoute } from "vue-router";
 
@@ -40,27 +39,25 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.anime__card {
+.anime_card {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 200px;
   margin: 1rem 0;
-  padding: 1rem;
 }
 
-.anime__card_img {
+.anime_card__img {
+  height: 200px;
   padding: 1rem;
-  width: 30%;
+  border: 1px solid var(--text-color);
+  border-radius: 3px;
 }
 
-.anime__card_img img {
+.anime_card__img img {
   height: 100%;
 }
 
-.anime__card_description {
-  padding: 1rem;
-  width: 70%;
+.anime_card__description {
+  padding: 1.2rem;
 }
 </style>
