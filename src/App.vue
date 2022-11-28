@@ -23,21 +23,26 @@ import { RouterLink, RouterView } from 'vue-router';
     width: 100%;
     font-size: 12px;
     text-align: center;
-    margin-top: 2rem;
+    padding: 2rem 0;
   }
 
   nav a.router-link-exact-active {
-    color: var(--color-text);
+    color: #000000;
   }
 
-  nav a.router-link-exact-active:hover {
-    background-color: transparent;
+  nav a:visited {
+    color: #4c4c4c;
+  }
+
+  nav a.router-link-exact-active:hover, nav a:hover {
+    opacity: 0.8;
   }
 
   nav a {
     display: inline-block;
     padding: 0 1rem;
     border-left: 1px solid var(--color-border);
+    color: #4c4c4c;
   }
 
   nav a:first-of-type {
