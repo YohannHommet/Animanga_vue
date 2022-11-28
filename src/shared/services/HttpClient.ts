@@ -1,10 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 import type { AxiosInstance } from "axios";
-import type { AxiosResponse } from "axios";
-
-declare module 'axios' {
-  interface AxiosResponse<T = any> extends Promise<T> {}
-}
+import type { AxiosRequestConfig } from "axios";
 
 abstract class HttpClient {
   protected readonly instance: AxiosInstance;
@@ -14,14 +10,21 @@ abstract class HttpClient {
       baseURL,
     });
 
-    this.instance.interceptors.response.use(this.handleSuccess, this.handleError);
+    this._initializeResponseInterceptor();
   }
 
-  private handleSuccess({ data }: AxiosResponse): AxiosResponse {
-    return data;
+  protected _initializeResponseInterceptor() {
+    this.instance.interceptors.request.use(
+      this._handleResponse,
+      this._handleError
+      );
   }
 
-  private handleError(error: any): Promise<any> {
+  private _handleResponse(response: AxiosRequestConfig): AxiosRequestConfig {
+    return response.data;
+  }
+
+  private _handleError(error: any): Promise<any> {
     return Promise.reject(error);
   }
 }
