@@ -6,8 +6,8 @@ const router: Router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'animanga',
-      component: () => import('../../views/AnimangaView.vue'),
+      name: 'home',
+      component: () => import('../../views/HomeView.vue'),
     },
     {
       path: '/anime/:id',
