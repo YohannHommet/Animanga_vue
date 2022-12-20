@@ -1,6 +1,6 @@
-import type { IAnimangaResource } from "@/core/interfaces/AnimangaResource.interface";
+import type { IAnime } from "@/core/interfaces/anime.interface";
 
-export class AnimeModel implements IAnimangaResource {
+export class AnimeModel implements IAnime {
 
   public readonly id: number;
   public readonly title: string;
@@ -16,6 +16,10 @@ export class AnimeModel implements IAnimangaResource {
 
   public static create(id: number, title: string, image: string, synopsis: string): AnimeModel {
     return new AnimeModel(id, title, image, synopsis);
+  }
+
+  get hasImage(): boolean {
+    return this.image !== "";
   }
 
 }
