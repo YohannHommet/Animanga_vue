@@ -1,4 +1,4 @@
-import { AnimeModel } from "@/core/models/Anime.model";
+import { AnimeModel } from "@/core/models/anime.model";
 
 export class AnimeTransformer {
   public static transform(data: any): AnimeModel {
