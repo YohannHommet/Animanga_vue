@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import { AnimeModel } from "@/core/models/Anime.model";
+import { AnimeModel } from "@/core/models/anime.model";
 
 defineProps<{
   anime: {
@@ -25,7 +25,7 @@ defineProps<{
   };
 }>();
 
-console.log(anime)
+console.log(anime);
 </script>
 
 <style scoped>

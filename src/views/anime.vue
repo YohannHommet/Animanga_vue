@@ -3,18 +3,17 @@
   <h1 class="anime_title">{{ anime.title }}</h1>
   <div class="anime_card">
     <div class="anime_card__img">
-      <img :src="anime.images?.webp?.image_url || ``" alt="anime image" >
+      <img :src="anime.images?.webp?.image_url || ``" alt="anime image">
     </div>
     <div class="anime_card__description">
       <p>{{ anime.synopsis }}</p>
     </div>
   </div>
-
 </main>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 import { RouteLocationNormalizedLoaded, useRoute } from "vue-router";
 
 const anime = ref<any>({});

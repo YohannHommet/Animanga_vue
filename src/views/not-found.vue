@@ -1,5 +1,5 @@
 <template>
-<main id="not-found">
+<main role="main" id="not-found" aria-description="Error page content">
   <h1>404</h1>
   <p>Page not found.</p>
 </main>
