@@ -1,9 +1,9 @@
 <template>
-<main id="animanga">
+<main id="home">
   <h1 class="anime_title">Top Anime list</h1>
   <ul>
     <li v-for="anime in animeList" :key="anime.id">
-      <router-link class="anime" :to="{ name: 'anime', params: { id: anime.id } }">{{ anime.title }}</router-link>
+      <router-link class="anime" :to="{ name: 'anime', params: { animeId: anime.id } }">{{ anime.title }}</router-link>
     </li>
   </ul>
   <!--  Add pagination results -->
@@ -12,7 +12,6 @@
     <button class="btn btn-primary" @click="(nextPage)">Next</button>
   </div>
 
-
   <h2>Search for an Anime</h2>
   <form @submit.prevent="(search)">
     <input type="text" v-model="querySearch">
@@ -20,17 +19,30 @@
   </form>
 
   <div class="anime__card">
-    <h3>{{ animeSearch.title }}</h3>
-    <img v-if="animeSearch.images" :src="animeSearch.images?.webp?.image_url || ``" alt="anime image">
-    <p>{{ animeSearch.synopsis }}</p>
+    <ul>
+      <li v-for="search in animeSearch" :key="search.id">
+        <router-link class="search" :to="{ name: 'anime', params: { animeId: search.id } }">{{ search.title }}</router-link>
+      </li>
+    </ul>
+    <!--  Add pagination results -->
+    <div class="pagination">
+      <button class="btn btn-primary" @click="(prevPage)">Prev</button>
+      <button class="btn btn-primary" @click="(nextPage)">Next</button>
+    </div>
   </div>
 </main>
 </template>
 
+<script lang="ts">
+export default {
+  name: "home-view",
+}
+</script>
+
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { AnimeRepository } from "@/shared/services/anime.repository";
-import type { IAnimeList } from "@/core/interfaces/anime-list.interface";
+import type { IDataList } from "@/core/interfaces/anime-list.interface";
 import type { IAnime } from "@/core/interfaces/anime.interface";
 import type { IPagination } from "@/core/interfaces/pagination.interface";
 
@@ -38,33 +50,16 @@ import type { IPagination } from "@/core/interfaces/pagination.interface";
 const animeRepository: AnimeRepository = AnimeRepository.getInstance();
 const animeList = ref<IAnime[]>();
 const pagination = ref<IPagination>();
-const animeSearch = ref<any>({});
+const animeSearch = ref<IAnime[]>();
 const querySearch = ref("");
 
 // Methods
 const getAnimeList: () => Promise<void> = async () => {
   try {
-    const response: IAnimeList = await animeRepository.getAnimeList("anime");
+    const response: IDataList<IAnime> = await animeRepository.getTopList();
+
     animeList.value = response.data;
     pagination.value = response.pagination;
-
-    console.table(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const nextPage: () => Promise<void> = async () => {
-  try {
-    console.log(animeList.value);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const prevPage: () => Promise<void> = async () => {
-  try {
-    console.log(animeList.value);
   } catch (error) {
     console.error(error);
   }
@@ -72,9 +67,31 @@ const prevPage: () => Promise<void> = async () => {
 
 const search: () => Promise<void> = async () => {
   try {
-    const response = await animeRepository.getAnimeSearch("anime", querySearch.value, []);
-    console.log(response);
-    animeSearch.value = response.data.data[0];
+    const params = {
+      q: querySearch.value,
+    };
+    const searchParams = new URLSearchParams(params);
+
+    const response: IDataList<IAnime> = await animeRepository.getBySearch(searchParams);
+
+    animeSearch.value = response.data;
+    pagination.value = response.pagination;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const nextPage: () => Promise<void> = async () => {
+  try {
+    console.log("nextPage");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const prevPage: () => Promise<void> = async () => {
+  try {
+    console.log("prevPage");
   } catch (error) {
     console.error(error);
   }
