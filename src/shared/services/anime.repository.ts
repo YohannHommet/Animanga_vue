@@ -9,7 +9,7 @@ import type { IAnime } from "@/core/interfaces/anime.interface";
 export class AnimeRepository extends HttpClient {
   public static repositoryInstance?: AnimeRepository;
   private static readonly baseUrl: string = "https://api.jikan.moe/v4/";
-  private readonly baseEndpoint: string = "anime";
+  private static readonly baseEndpoint: string = "anime";
 
   private constructor() {
     super(AnimeRepository.baseUrl);
@@ -24,24 +24,20 @@ export class AnimeRepository extends HttpClient {
     return this.repositoryInstance;
   }
 
-  public async getTopList(searchParams?: URLSearchParams): Promise<IDataList<IAnime>> {
-    const url = searchParams
-      ? `top/${this.baseEndpoint}?${searchParams}`
-      : `top/${this.baseEndpoint}`;
-
-    const response: AxiosResponse = await this.instance.get(url);
+  public async getTopList(searchParams: URLSearchParams): Promise<IDataList<IAnime>> {
+    const response: AxiosResponse = await this.instance.get(`top/${AnimeRepository.baseEndpoint}?${searchParams}`);
 
     return AnimeListTransformer.transform(response.data);
   }
 
   public async getBySearch(searchParams: URLSearchParams): Promise<IDataList<IAnime>> {
-    const response: AxiosResponse = await this.instance.get(`${this.baseEndpoint}?${searchParams}`);
+    const response: AxiosResponse = await this.instance.get(`${AnimeRepository.baseEndpoint}?${searchParams}`);
 
     return AnimeListTransformer.transform(response.data);
   }
 
   public async getById(id: number): Promise<IAnime> {
-    const response: AxiosResponse = await this.instance.get(`${this.baseEndpoint}/${id}`);
+    const response: AxiosResponse = await this.instance.get(`${AnimeRepository.baseEndpoint}/${id}`);
 
     return AnimeTransformer.transform(response.data.data);
   }
