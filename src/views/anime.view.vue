@@ -3,7 +3,7 @@
   <h1 class="anime_title">{{ anime.title }}</h1>
   <div class="anime_card">
     <div class="anime_card__img">
-      <img :src="anime.images?.webp?.image_url || ``" alt="anime image">
+      <img :src="anime.image" alt="anime image">
     </div>
     <div class="anime_card__description">
       <p>{{ anime.synopsis }}</p>
@@ -12,29 +12,33 @@
 </main>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref } from "vue";
+<script lang="ts">
+export default {
+  name: "anime-view"
+};
+</script>
+
+<script lang="ts" setup>
+import { ref } from "vue";
 import { RouteLocationNormalizedLoaded, useRoute } from "vue-router";
 
-const anime = ref<any>({});
-const route: RouteLocationNormalizedLoaded = useRoute();
+import { IAnime } from "@/core/interfaces/anime.interface";
+import { AnimeRepository } from "@/shared/services/anime.repository";
 
-const getAnime = async () => {
+const animeRepository: AnimeRepository = AnimeRepository.getInstance();
+const route: RouteLocationNormalizedLoaded = useRoute();
+const anime = ref<IAnime>();
+const id = ref(route.params.animeId);
+
+const getAnime: (id?: string) => Promise<void> = async () => {
   try {
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${route.params.id}`);
-    const jsonResponse = await response.json();
-    anime.value = jsonResponse.data;
-    console.log(anime.value);
+    anime.value = await animeRepository.getById(+id.value);
   } catch (error) {
     console.error(error);
   }
 };
 
-// on mounted, get the anime
-onMounted(() => {
-  getAnime();
-});
-
+getAnime();
 </script>
 
 <style scoped>
@@ -47,13 +51,15 @@ onMounted(() => {
 
 .anime_card__img {
   height: 200px;
-  padding: 1rem;
-  border: 1px solid var(--text-color);
+  padding: 0.6rem;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+
   border-radius: 3px;
 }
 
 .anime_card__img img {
   height: 100%;
+  border-top-left-radius: 10px;
 }
 
 .anime_card__description {
