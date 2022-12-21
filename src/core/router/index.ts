@@ -7,22 +7,22 @@ const router: Router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../../views/home.vue'),
+      component: () => import('../../views/home.view.vue'),
     },
     {
-      path: '/anime/:id',
+      path: '/anime/:animeId',
       name: 'anime',
-      component: () => import('../../views/anime.vue'),
+      component: () => import('../../views/anime.view.vue'),
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('../../views/about.vue'),
+      component: () => import('../../views/about.view.vue'),
     },
     {
       path: '/:catchAll(.*)',
       name: 'not-found',
-      component: () => import('../../views/not-found.vue'),
+      component: () => import('../../views/not-found.view.vue'),
     },
   ],
 });

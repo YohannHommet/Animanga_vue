@@ -1,13 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from "vitest";
 
-import { mount } from '@vue/test-utils'
-import Home from "@/views/home.vue";
+import { mount } from "@vue/test-utils";
+import Home from "@/views/home.view.vue";
 
-describe('home view', () => {
-  it('renders properly', () => {
-    const wrapper = mount(Home)
+describe("home view", () => {
+  it("renders properly",
+    () => {
+      const wrapper = mount(Home);
 
-    // Check that the component is mounted
-    expect(wrapper.vm).toBeTruthy()
-  })
-})
+      expect(wrapper.vm).toBeTruthy();
+
+    });
+});

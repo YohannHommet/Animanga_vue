@@ -5,6 +5,14 @@
 </main>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "about-view",
+};
+</script>
+
+<script setup lang="ts">
+
+</script>
 
 <style scoped></style>

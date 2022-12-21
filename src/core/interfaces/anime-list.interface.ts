@@ -1,7 +1,6 @@
 import type { IPagination } from "./pagination.interface";
-import type { IAnime } from "./anime.interface";
 
-export interface IAnimeList {
-  readonly data: Array<IAnime>;
+export interface IDataList<T> {
+  readonly data: Array<T>;
   readonly pagination: IPagination;
 }

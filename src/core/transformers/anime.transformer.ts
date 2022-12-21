@@ -5,7 +5,7 @@ export class AnimeTransformer {
     return AnimeModel.create(
       data.mal_id,
       data.title,
-      data.images.webp.image_url,
+      (data.images.webp.image_url || data.images.webp.large_image_url) ?? "",
       data.synopsis
     );
   }
