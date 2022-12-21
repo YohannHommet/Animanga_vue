@@ -1,12 +1,15 @@
 import HttpClient from "@/shared/services/http-client";
 import { AnimeListTransformer } from "@/core/transformers/anime-list.transformer";
+import { AnimeTransformer } from "@/core/transformers/anime.transformer";
 
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { IAnimeList } from "@/core/interfaces/anime-list.interface";
+import type { IDataList } from "@/core/interfaces/anime-list.interface";
+import type { IAnime } from "@/core/interfaces/anime.interface";
 
 export class AnimeRepository extends HttpClient {
-  private static readonly baseUrl: string = "https://api.jikan.moe/v4/";
   public static repositoryInstance?: AnimeRepository;
+  private static readonly baseUrl: string = "https://api.jikan.moe/v4/";
+  private readonly baseEndpoint: string = "anime";
 
   private constructor() {
     super(AnimeRepository.baseUrl);
@@ -21,24 +24,26 @@ export class AnimeRepository extends HttpClient {
     return this.repositoryInstance;
   }
 
-  public async getAnimeList(endpoint: string): Promise<IAnimeList> {
-    const response: AxiosResponse = await this.instance.get(endpoint);
+  public async getTopList(searchParams?: URLSearchParams): Promise<IDataList<IAnime>> {
+    const url = searchParams
+      ? `top/${this.baseEndpoint}?${searchParams}`
+      : `top/${this.baseEndpoint}`;
+
+    const response: AxiosResponse = await this.instance.get(url);
 
     return AnimeListTransformer.transform(response.data);
   }
 
-  public async getAnimeSearch(endpoint: string, searchQuery?: string, searchParams?: any): Promise<any> {
-    if (searchQuery) {
-      endpoint += `?q=${searchQuery}`;
-    }
-
-    if (searchParams) {
-      endpoint += `&${searchParams}`;
-    }
-
-    const response: AxiosResponse = await this.instance.get(endpoint);
+  public async getBySearch(searchParams: URLSearchParams): Promise<IDataList<IAnime>> {
+    const response: AxiosResponse = await this.instance.get(`${this.baseEndpoint}?${searchParams}`);
 
     return AnimeListTransformer.transform(response.data);
+  }
+
+  public async getById(id: number): Promise<IAnime> {
+    const response: AxiosResponse = await this.instance.get(`${this.baseEndpoint}/${id}`);
+
+    return AnimeTransformer.transform(response.data.data);
   }
 
   protected _initializeResponseInterceptor() {
@@ -54,9 +59,9 @@ export class AnimeRepository extends HttpClient {
   }
 
   private _handleRequest(config: AxiosRequestConfig): AxiosRequestConfig {
-    console.log("Request Interceptor", config);
-    // @ts-ignore
-    config.headers["Content-Type"] = "application/json";
+    config.headers = {
+      "Content-Type": "application/json"
+    };
 
     return config;
   }
