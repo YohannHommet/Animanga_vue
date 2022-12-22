@@ -3,14 +3,14 @@
   <h1 class="anime_title">{{ anime?.title }}</h1>
   <div class="anime_card">
     <div class="anime_card__img">
-      <img :src="anime?.image" :alt="anime.title" @click="showOverlay = !showOverlay">
+      <img :alt="anime?.title" :src="anime?.image" @click="showOverlay = !showOverlay">
     </div>
     <div class="anime_card__description">
       <p>{{ anime?.synopsis }}</p>
     </div>
   </div>
-  <div class="overlay_container" v-if="showOverlay">
-    <img class="overlay_image" :src="anime.image" :alt="anime.title" @click="showOverlay = !showOverlay">
+  <div v-if="showOverlay" class="overlay_container">
+    <img :alt="anime?.title" :src="anime?.image" class="overlay_image" @click="showOverlay = !showOverlay">
   </div>
 </main>
 </template>
@@ -22,20 +22,25 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { defineProps } from "vue";
 import { ref } from "vue";
-import { RouteLocationNormalizedLoaded, useRoute } from "vue-router";
-import { IAnime } from "@/core/interfaces/anime.interface";
 import { AnimeRepository } from "@/shared/services/anime.repository";
+import type { IAnime } from "@/core/interfaces/anime.interface";
+
+const props = defineProps<{
+  animeId: {
+    type: string;
+    required: true;
+  };
+}>();
 
 const animeRepository: AnimeRepository = AnimeRepository.getInstance();
-const route: RouteLocationNormalizedLoaded = useRoute();
-const id = ref(route.params.animeId);
 const anime = ref<IAnime>();
 const showOverlay = ref<Boolean>(false);
 
-const getAnime: (id?: string) => Promise<void> = async () => {
+const getAnime: () => Promise<void> = async () => {
   try {
-    anime.value = await animeRepository.getById(+id.value);
+    anime.value = await animeRepository.getById(+props.animeId);
   } catch (error) {
     console.error(error);
   }
