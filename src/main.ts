@@ -4,7 +4,7 @@ import { createPinia } from 'pinia';
 import router from './core/router/index';
 import App from './App.vue';
 
-import './assets/main.css';
+import './assets/main.scss';
 
 const app = createApp(App);
 

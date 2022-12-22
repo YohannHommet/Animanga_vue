@@ -18,24 +18,22 @@ export default defineConfig({
       "@tests": fileURLToPath(new URL("./tests", import.meta.url))
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/assets/_variables.scss";`
+      }
+    }
+  },
   base: "./",
   server: {
     port: 4000,
     open: true,
     cors: true
   },
-  test: {
-    environment: "jsdom",
-    coverage: {
-      include: ["src/**/*.{ts,vue}"],
-      exclude: [
-        "env.d.ts",
-        "src/main.ts",
-        "src/core/**/*.{ts,vue}",
-        "src/shared/**/*.{ts,vue}"
-      ],
-      reporter: ["text-summary", "html", "json"],
-      reportsDirectory: "tests/coverage"
-    }
-  }
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+    chunkSizeWarningLimit: 1000,
+  },
 });
