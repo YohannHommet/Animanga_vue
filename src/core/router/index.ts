@@ -10,7 +10,7 @@ const router: Router = createRouter({
       component: () => import("../../views/home.view.vue")
     },
     {
-      path: "/anime/:animeId",
+      path: "/anime/:animeId/:animeTitle",
       name: "anime",
       component: () => import("../../views/anime.view.vue"),
       props: true,
@@ -21,6 +21,11 @@ const router: Router = createRouter({
           ? next({ name: "home" })
           : next();
       }
+    },
+    {
+      path: "/chat",
+      name: "chat",
+      component: () => import("../../views/chat.view.vue")
     },
     {
       path: "/about",
