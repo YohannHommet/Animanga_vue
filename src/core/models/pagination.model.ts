@@ -1,4 +1,4 @@
-import type { IPagination, IPaginationItems } from "@/core/interfaces/pagination.interface";
+import type { IPagination, IPaginationItems } from "@/shared/interfaces/pagination.interface";
 
 export class PaginationModel implements IPagination {
   public readonly current_page: number;

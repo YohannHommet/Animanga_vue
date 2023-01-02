@@ -1,4 +1,4 @@
-import type { IAnime } from "@/core/interfaces/anime.interface";
+import type { IAnime } from "@/shared/interfaces/anime.interface";
 
 export class AnimeModel implements IAnime {
 

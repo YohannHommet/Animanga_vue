@@ -1,4 +1,4 @@
-import type { IPagination } from "@/core/interfaces/pagination.interface";
+import type { IPagination } from "@/shared/interfaces/pagination.interface";
 
 export class PaginationTransformer {
   public static transform(data: any): IPagination {
