@@ -9,23 +9,23 @@ module.exports = {
     es2022: true,
   },
   extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript',
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/eslint-config-typescript"
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    parser: '@typescript-eslint/parser',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    parser: "@typescript-eslint/parser",
+    sourceType: "module"
   },
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ["vue"],
   rules: {
     // @see https://eslint.vuejs.org/rules/component-definition-name-casing
-    'vue/component-definition-name-casing': ['error', 'kebab-case'],
+    "vue/component-definition-name-casing": ["error", "kebab-case"],
 
     // Enforce consistent indentation in `<template>`.
     // @see https://eslint.vuejs.org/rules/html-indent
-    'vue/html-indent': ['error', 2, {
+    "vue/html-indent": ["error", 2, {
       attribute: 1,
       baseIndent: 0,
       closeBracket: 0,
