@@ -7,7 +7,7 @@
     font-size: 1.6rem;
     font-weight: normal;
     box-sizing: border-box;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.12rem;
     scroll-behavior: smooth;
 }
 
@@ -23,7 +23,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-
-p {
-    color: var(--text-color);
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    color: var(--color-heading);
 }
