@@ -1,6 +1,6 @@
 <template>
 <main id="anime">
-  <h1 class="anime_title">{{ anime?.title }}</h1>
+  <h1 class="title">{{ anime?.title }}</h1>
   <div class="anime_card">
     <div class="anime_card__img">
       <img :alt="anime?.title" :src="anime?.image" @click="showOverlay = !showOverlay">
@@ -56,16 +56,13 @@ getAnime();
     margin: 1rem 0;
 
     .anime_card__img {
-      height: 200px;
-      padding: 0.6rem;
-      box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
-      border-radius: 3px;
       transition: all 0.3s ease-in-out;
 
       img {
-        height: 100%;
-        border-radius: 5px;
+        height: 250px;
+        border-radius: 50% 50% 80% 20% / 80% 50% 50% 20%;
         cursor: pointer;
+        box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
       }
     }
 
