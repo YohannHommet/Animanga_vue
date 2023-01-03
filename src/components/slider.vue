@@ -4,15 +4,22 @@
     <div class="blaze-track-container">
       <div class="blaze-track">
         <div class="blaze_img">
-          <img src="https://picsum.photos/id/276/1280/450" alt="img" aria-description="image">
+          <img alt="img" aria-description="image" src="https://picsum.photos/id/276/1280/450">
         </div>
         <div class="blaze_img">
-          <img src="https://picsum.photos/id/543/1280/450" alt="img" aria-description="image">
+          <img alt="img" aria-description="image" src="https://picsum.photos/id/543/1280/450">
         </div>
         <div class="blaze_img">
-          <img src="https://picsum.photos/id/823/1280/450" alt="img" aria-description="image">
+          <img alt="img" aria-description="image" src="https://picsum.photos/id/823/1280/450">
         </div>
       </div>
+    </div>
+
+    <!-- putting nav buttons and pagination in a custom structure -->
+    <div class="slider_pagination">
+      <button aria-label="Go to previous slide" class="blaze-prev btn">&laquo;</button>
+      <div class="blaze-pagination"></div>
+      <button aria-label="Go to next slide" class="blaze-next btn">&raquo;</button>
     </div>
   </div>
 </div>
@@ -56,15 +63,66 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
-.blaze_img {
-  width: 100%;
-  height: 100%;
+<style lang="scss" scoped>
+.blaze-slider .blaze-container {
 
-  img {
+  .blaze_img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .slider_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      margin: 0 1rem;
+      padding: 0;
+      font-size: 3rem;
+      border: none;
+      box-shadow: none;
+      cursor: pointer;
+      transform: translateY(-2px);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #333;
+      }
+    }
+
+    .blaze-pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      ::v-deep button {
+        height: 10px;
+        width: 10px;
+        padding: 0;
+        margin: 0 0.5rem;
+        background: var(--color-text);
+        border: none;
+        border-radius: 50%;
+        color: #0000;
+        cursor: pointer;
+        outline: 0;
+        transition: transform .2s, background .3s;
+
+        &.active {
+          background-color: var(--color-link);
+          border-color: var(--color-link);
+          transform: scale(1.2);
+        }
+      }
+    }
+
   }
 }
 </style>
