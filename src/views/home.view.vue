@@ -146,7 +146,7 @@ onMounted(() => {
       align-items: center;
       border: 1px solid #ccc;
       border-radius: 5px;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px, rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
 
       .anime_card__img {
         width: 100%;
@@ -159,7 +159,7 @@ onMounted(() => {
         visibility: hidden;
         bottom: 0;
         height: 0;
-        width: 98%;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -167,7 +167,6 @@ onMounted(() => {
         padding: 1rem;
 
         border: 1px solid rgba(255, 255, 255, 0.30);
-        border-radius: 5% 5% 0% 0% / 5% 5% 0% 0%;
 
         background: rgba(255, 255, 255, 0.25);
         backdrop-filter: blur(5px);
