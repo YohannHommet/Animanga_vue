@@ -1,40 +1,50 @@
 <template>
 <main id="home">
-  <div v-if="isLoading">
+
+  <div v-if="isLoading" class="spinner_wrapper">
     <img alt="loading" class="spinner" src="/spinner.gif">
   </div>
-  <h1 class="anime_title">Top Anime list</h1>
-  <ul v-if="!isLoading">
-    <li v-for="anime in animeList" :key="anime.id">
-      <router-link :to="{ name: 'anime', params: { animeId: +anime.id, animeTitle: slugify(anime.title) } }" class="anime">{{ anime.title }}
-      </router-link>
-    </li>
-  </ul>
-  <!-- pagination -->
-  <div class="pagination">
-    <button :disabled="topPagination?.current_page === 1" class="btn btn-primary" @click="(prevPage)">Prev</button>
-    <button :disabled="!topPagination?.has_next_page" class="btn btn-primary" @click="(nextPage)">Next</button>
-  </div>
 
-  <h2>Search for an Anime</h2>
-  <form @submit.prevent="(search)">
-    <input v-model="querySearch" type="text">
-    <button type="submit">Search</button>
-  </form>
+  <h1 class="title">Top Anime list</h1>
 
-  <div class="anime__card">
-    <ul>
-      <li v-for="search in animeSearch" :key="search.id">
-        <router-link :to="{ name: 'anime', params: { animeId: +search.id, animeName: search.title } }" class="search">{{ search.title }}
+  <div v-if="!isLoading" class="anime_cards">
+    <div v-for="anime in animeList" :key="anime.id" class="anime_card">
+      <img :src="anime.image" alt="anime image" class="anime_card__img">
+      <div class="anime_card__content">
+        <router-link :to="{ name: 'anime', params: { animeId: +anime.id, animeTitle: slugify(anime.title) } }" class="anime_card__title">
+          {{ anime.title }}
         </router-link>
-      </li>
-    </ul>
+      </div>
+    </div>
+
     <!-- pagination -->
     <div class="pagination">
-      <button class="btn btn-primary" @click="(prevPage)">Prev</button>
-      <button class="btn btn-primary" @click="(nextPage)">Next</button>
+      <button :disabled="topPagination?.current_page === 1" class="btn" type="button" @click="(prevPage)">Prev</button>
+      <button :disabled="!topPagination?.has_next_page" class="btn" type="button" @click="(nextPage)">Next</button>
     </div>
   </div>
+
+
+  <!--  <h2>Search for an Anime</h2> -->
+  <!--  <form @submit.prevent="(search)"> -->
+  <!--    <input v-model="querySearch" type="text"> -->
+  <!--    <button type="submit" class="btn">Search</button> -->
+  <!--  </form> -->
+
+  <!--  <div class="anime__card"> -->
+  <!--    <ul> -->
+  <!--      <li v-for="search in animeSearch" :key="search.id"> -->
+  <!--        <router-link :to="{ name: 'anime', params: { animeId: +search.id, animeName: search.title } }" class="search">{{ search.title }} -->
+  <!--        </router-link> -->
+  <!--      </li> -->
+  <!--    </ul> -->
+  <!--    &lt;!&ndash; pagination &ndash;&gt; -->
+  <!--    <div class="pagination"> -->
+  <!--      <button class="btn" @click="(prevPage)">Prev</button> -->
+  <!--      <button class="btn" @click="(nextPage)">Next</button> -->
+  <!--    </div> -->
+  <!--  </div> -->
+
 </main>
 </template>
 
@@ -120,22 +130,92 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.anime {
-  cursor: pointer;
-  transition: 0.2s;
-  color: var(--color-link);
+#home {
 
-  &:hover {
-    color: var(--color-hover);
+  .anime_cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+    margin: 0 auto;
+
+    .anime_card {
+      width: 18%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+
+      .anime_card__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .anime_card__content {
+        position: absolute;
+        visibility: hidden;
+        bottom: 0;
+        height: 0;
+        width: 98%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+
+        border: 1px solid rgba(255, 255, 255, 0.30);
+        border-radius: 5% 5% 0% 0% / 5% 5% 0% 0%;
+
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        transition: height 0.2s linear;
+
+        .anime_card__title {
+          color: var(--white);
+          font-weight: bold;
+          font-size: 1.8rem;
+          text-decoration: none;
+
+          &:hover {
+            color: var(--white-soft);
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &:hover {
+        .anime_card__content {
+          height: 120px;
+          visibility: initial;
+        }
+      }
+
+
+    }
+
   }
-}
 
-.spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
+  .spinner_wrapper {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: var(--white-soft);
+
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
