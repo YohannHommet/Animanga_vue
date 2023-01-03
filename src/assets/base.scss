@@ -28,3 +28,20 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.2rem;
     color: var(--color-heading);
 }
+
+.btn {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--color-text);
+    background: var(--white);
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: var(--white-soft);
+        box-shadow: none;
+    }
+}
