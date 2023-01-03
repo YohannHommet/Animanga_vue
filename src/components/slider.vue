@@ -1,16 +1,21 @@
 <template>
-  <div class="blaze-slider">
-    <div class="blaze-container">
-      <div class="blaze-track-container">
-        <div class="blaze-track">
-          <div class="slider-img">1</div>
-          <div class="slider-img">2</div>
-          <div class="slider-img">3</div>
-          <div class="slider-img">4</div>
+<div ref="slider" class="blaze-slider">
+  <div class="blaze-container">
+    <div class="blaze-track-container">
+      <div class="blaze-track">
+        <div class="blaze_img">
+          <img src="https://picsum.photos/id/276/1280/450" alt="img" aria-description="image">
+        </div>
+        <div class="blaze_img">
+          <img src="https://picsum.photos/id/543/1280/450" alt="img" aria-description="image">
+        </div>
+        <div class="blaze_img">
+          <img src="https://picsum.photos/id/823/1280/450" alt="img" aria-description="image">
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script lang="ts">
@@ -20,33 +25,46 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import BlazeSlider from "blaze-slider";
 import "blaze-slider/dist/blaze.css";
 
-onMounted(() => {
-  const sliderElement = document.querySelector<HTMLElement>(".blaze-slider") as HTMLElement;
+const slider = ref<HTMLElement | null>(null);
 
-  new BlazeSlider(sliderElement, {
+onMounted(() => {
+  new BlazeSlider(slider.value as HTMLElement, {
       all: {
+        // layout
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        slideGap: "20px",
+        // loop
+        loop: true,
+        // autoplay
         enableAutoplay: true,
+        stopAutoplayOnInteraction: true,
         autoplayInterval: 5000,
+        autoplayDirection: "to left",
+        // pagination
+        enablePagination: true,
+        // transition
         transitionDuration: 800,
-        slidesToShow: 1
+        transitionTimingFunction: "ease"
       }
     }
   );
 });
 </script>
 
-<style scoped>
-.slider-img {
+<style scoped lang="scss">
+.blaze_img {
   width: 100%;
   height: 100%;
-  background-color: red;
-  padding: 2rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 </style>
